@@ -1,20 +1,24 @@
 var mysql = require("mysql");
+var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
+  // The port
   port: 3306,
 
-  // Your username
+  // Username
   user: "root",
 
-  // Your password
+  // Password & Database
   password: "brady1212",
   database: "bamazon_db"
 });
 
+// Connect to MySQL
 connection.connect(function(err) {
   if (err) throw err;
-  console.log("connected as item_id " + connection.threadId + "\n");
+
+  // Start function after the connection is made
+  start();
 });
