@@ -30,7 +30,7 @@ function start() {
     console.log("");
 
     for (i = 0; i < results.length; i++) {
-      console.log(" Item # " + results[i].item_id + " is a " + results[i].product_name + " --- " + "The price is $" + results[i].price)
+      console.log(" Item # " + results[i].item_id + " is a " + results[i].product_name + " - " + "Price $" + results[i].price + " - " + results[i].stock_quantity + " left in stock. ")
     }
 
 
