@@ -39,31 +39,38 @@ function start() {
       .prompt([
         {
           type: "input",
-          name: "item id",
+          name: "item_id",
           message: "What is the item number of the product you like to purchase?",
-          validate: function(value) {
+          validate: function (value) {
             if (isNaN(value) == false) {
-                return true;
+              return true;
             } else {
-                return false;
+              return false;
             }
-        }
-    }, 
-    {
+          }
+        },
+        {
           type: "input",
           name: "quantity",
           message: "How many would you like to purchase?",
-          validate: function(value) {
+          validate: function (value) {
             if (isNaN(value) == false) {
-              return true; 
+              return true;
             } else {
               return false;
             }
           }
         }
       ])
-      
-      
+
+      .then(function(purchase) {
+        let selectedId = purchase.item_id - 1
+        let selectedProduct = results[selectedId]
+        let selectedQty = purchase.quantity
+        if (selectedQty < results[selectedId].stock_quantity) {
+          console.log(" The total cost for " + purchase.quantity + " " + results[selectedId].product_name + "s" + " is $" + results[selectedId].price * selectedQty);
+        }
+      })
   })
 };
 start();
