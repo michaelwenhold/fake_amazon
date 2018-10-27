@@ -41,14 +41,29 @@ function start() {
           type: "input",
           name: "item id",
           message: "What is the item number of the product you like to purchase?",
-        },
-
-        {
+          validate: function(value) {
+            if (isNaN(value) == false) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }, 
+    {
           type: "input",
           name: "quantity",
-          message: "How many would you like to purchase?"
-        },
+          message: "How many would you like to purchase?",
+          validate: function(value) {
+            if (isNaN(value) == false) {
+              return true; 
+            } else {
+              return false;
+            }
+          }
+        }
       ])
+      
+      
   })
 };
 start();
