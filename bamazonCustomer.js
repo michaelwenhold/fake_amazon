@@ -63,14 +63,31 @@ function start() {
         }
       ])
 
-      .then(function(purchase) {
+      .then(function (purchase) {
         let selectedId = purchase.item_id - 1
         let selectedProduct = results[selectedId]
         let selectedQty = purchase.quantity
         if (selectedQty < results[selectedId].stock_quantity) {
           console.log(" The total cost for " + purchase.quantity + " " + results[selectedId].product_name + "s" + " is $" + results[selectedId].price * selectedQty);
+         
+          connection.query("UPDATE products SET ? WHERE ?", [{
+            stock_quantity: results[selectedId].stock_quantity - selectedQty
+          }, {
+            item_id: results[selectedId].item_id
+
+          }], function (err, results) {
+            //console.log(err);
+            start();
+          });
         }
+        else {
+          console.log("I'm sorry. We do not have enough in our inventory to fill your order. Please try another order");
+          start();
+        }
+
+
       })
   })
 };
+
 start();
